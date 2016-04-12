@@ -69,6 +69,7 @@ namespace LibraryData
                 var loadOptions = new DataLoadOptions();
                 loadOptions.LoadWith<Book>(b => b.Author);
                 loadOptions.LoadWith<Book>(b => b.BookSubjects);
+                loadOptions.LoadWith<BookSubject>(b => b.Subject);
                 context.LoadOptions = loadOptions;
                 return context.Books.ToList();
             }

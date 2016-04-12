@@ -1,0 +1,18 @@
+﻿@using Library.Models;
+@using LibraryData;
+@model HomeModel
+           <table class="table table-responsive table-bordered table-condensed table-striped">
+               <tr>
+                   <th>Title</th>
+                   <th>Author</th>
+                   <th>Subjects</th>
+               </tr>
+               @foreach(Book book in Model.Books)
+               {
+                   <tr>
+                       <td>@book.Name</td>
+                       <td>@book.Author</td>
+                       <td></td>
+                   </tr>
+               }
+           </table>
