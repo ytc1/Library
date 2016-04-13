@@ -224,6 +224,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Signup.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -237,8 +238,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Main.cshtml" />
-    <Content Include="Views\Home\Signin.cshtml" />
-    <Content Include="Views\Home\Signout.cshtml" />
+    <Content Include="Views\Home\SignIn.cshtml" />
+    <Content Include="Views\Home\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

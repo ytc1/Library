@@ -1,0 +1,16 @@
+﻿
+<div class="container">
+    <form class="form-group" method="post" action="/home/newuser">
+        <label>FirstName</label>
+        <input id="firstName-text" type="text" name="firstName" />
+        <label>LastName</label>
+        <input id="lastName-text" type="text" name="lastName" /><h1 id="nonvalid-user"></h1>
+        <label>Password</label>
+        <input type="text" name="password" />
+        <button type="submit" class="button btn-success ">Submit</button>
+    </form>
+
+</div>
+@section scripts{
+<script src="~/Scripts/Signup.js"></script>
+}

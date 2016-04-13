@@ -26,14 +26,6 @@
       <Association Name="Subject_BookSubject" Member="Subject" ThisKey="SubjectId" OtherKey="Id" Type="Subject" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Member" Member="Members">
-    <Type Name="Member">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="DateJoined" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.Subject" Member="Subjects">
     <Type Name="Subject">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -47,6 +39,16 @@
       <Column Name="BookId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="DateBorrowed" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Returned" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Member" Member="Members">
+    <Type Name="Member">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateJoined" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Salt" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

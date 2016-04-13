@@ -101,5 +101,37 @@ namespace LibraryData
                 return context.Borrows.Where(b => b.MemberId == member.Id).ToList();
             }
         }
+        public Member AddMember(string firstName,string lastName, string password)
+        {
+            Member member = new Member();
+            string salt = PasswordHelper.GenerateRandomSalt();
+            member.PasswordHash = PasswordHelper.HashPassword(password, salt);
+            member.Salt = salt;
+            member.FirstName = firstName;
+            member.LastName = lastName;
+            using (var context = new DataClasses1DataContext(_connectionString))
+            {
+                context.Members.InsertOnSubmit(member);
+                context.SubmitChanges();
+            }
+            return member;
+
+        }
+        public Member GetMember(string firstName, string lastName, string password)
+        {
+            using (var context = new DataClasses1DataContext(_connectionString))
+            {
+                Member member = context.Members.Where(m => m.FirstName  == firstName && m.LastName == lastName).First();
+                bool success = PasswordHelper.PasswordMatch(password, member.PasswordHash, member.Salt);
+                return success ? member : null;
+            }
+        }
+        public bool CheckUser(string firstName, string lastName)
+        {
+            using (var context = new DataClasses1DataContext(_connectionString))
+            {
+                return !context.Members.Any(m => m.FirstName == firstName && m.LastName == lastName);
+            }
+        }
     }
 }

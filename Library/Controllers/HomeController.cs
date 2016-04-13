@@ -8,7 +8,7 @@ using Library.Models;
 
 namespace Library.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         //
         // GET: /Home/
@@ -20,6 +20,13 @@ namespace Library.Controllers
             homeModel.Books = Db.GetBooks();
             return View(homeModel);
         }
-
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+        public ActionResult SignUp()
+        {
+            return View();
+        }
     }
 }
