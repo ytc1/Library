@@ -30,14 +30,7 @@ namespace LibraryData
                 context.SubmitChanges();
             }
         }
-        public void AddMember(Member member)
-        {
-            using (var context = new DataClasses1DataContext(_connectionString))
-            {
-                context.Members.InsertOnSubmit(member);
-                context.SubmitChanges();
-            }
-        }
+  
         public void AddSubject(Subject subject)
         {
             using (var context = new DataClasses1DataContext(_connectionString))

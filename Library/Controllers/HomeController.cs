@@ -28,5 +28,32 @@ namespace Library.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult MemberSignin(string firstName, string lastName, string password)
+        {
+            DataBase Db = new DataBase(connectionString);
+            Member member = Db.GetMember(firstName, lastName, password);
+            HomeModel homeModel = new HomeModel();
+            homeModel.User = member;
+            homeModel.Books = Db.GetBooks();
+            return RedirectToAction("Main", homeModel);
+        }
+          [HttpPost]
+        public ActionResult CheckUser(string firstName, string lastName)
+        {
+            DataBase Db = new DataBase(connectionString);
+           bool valid= Db.CheckUser(firstName, lastName);
+           return Json(valid);
+        }
+        [HttpPost]
+        public ActionResult NewUser(string firstName, string lastName, string password)
+        {
+            DataBase Db = new DataBase(connectionString);
+            Member member = Db.AddMember(firstName, lastName, password);       
+            HomeModel homeModel = new HomeModel();
+            homeModel.User = member;
+            homeModel.Books = Db.GetBooks();
+            return RedirectToAction("Main", homeModel);
+        }
     }
 }
