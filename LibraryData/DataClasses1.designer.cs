@@ -45,6 +45,9 @@ namespace LibraryData
     partial void InsertMember(Member instance);
     partial void UpdateMember(Member instance);
     partial void DeleteMember(Member instance);
+    partial void InsertAdmin(Admin instance);
+    partial void UpdateAdmin(Admin instance);
+    partial void DeleteAdmin(Admin instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -122,6 +125,14 @@ namespace LibraryData
 			get
 			{
 				return this.GetTable<Member>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Admin> Admins
+		{
+			get
+			{
+				return this.GetTable<Admin>();
 			}
 		}
 	}
@@ -972,6 +983,164 @@ namespace LibraryData
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Salt", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string Salt
+		{
+			get
+			{
+				return this._Salt;
+			}
+			set
+			{
+				if ((this._Salt != value))
+				{
+					this.OnSaltChanging(value);
+					this.SendPropertyChanging();
+					this._Salt = value;
+					this.SendPropertyChanged("Salt");
+					this.OnSaltChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
+	public partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _FirstName;
+		
+		private string _LastName;
+		
+		private string _PasswordHash;
+		
+		private string _Salt;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnFirstNameChanging(string value);
+    partial void OnFirstNameChanged();
+    partial void OnLastNameChanging(string value);
+    partial void OnLastNameChanged();
+    partial void OnPasswordHashChanging(string value);
+    partial void OnPasswordHashChanged();
+    partial void OnSaltChanging(string value);
+    partial void OnSaltChanged();
+    #endregion
+		
+		public Admin()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this.OnFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._FirstName = value;
+					this.SendPropertyChanged("FirstName");
+					this.OnFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this.OnLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._LastName = value;
+					this.SendPropertyChanged("LastName");
+					this.OnLastNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string PasswordHash
+		{
+			get
+			{
+				return this._PasswordHash;
+			}
+			set
+			{
+				if ((this._PasswordHash != value))
+				{
+					this.OnPasswordHashChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordHash = value;
+					this.SendPropertyChanged("PasswordHash");
+					this.OnPasswordHashChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Salt", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string Salt
 		{
 			get

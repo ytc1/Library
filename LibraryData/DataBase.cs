@@ -126,5 +126,30 @@ namespace LibraryData
                 return !context.Members.Any(m => m.FirstName == firstName && m.LastName == lastName);
             }
         }
+        public Admin AddAdmin(string firstName, string lastName, string password)
+        {
+            Admin admin = new Admin();
+            string salt = PasswordHelper.GenerateRandomSalt();
+            admin.PasswordHash = PasswordHelper.HashPassword(password, salt);
+            admin.Salt = salt;
+            admin.FirstName = firstName;
+            admin.LastName = lastName;
+            using (var context = new DataClasses1DataContext(_connectionString))
+            {
+                context.Admins.InsertOnSubmit(admin);
+                context.SubmitChanges();
+            }
+            return admin;
+
+        }
+        public Admin GetAdmin(string firstName, string lastName, string password)
+        {
+            using (var context = new DataClasses1DataContext(_connectionString))
+            {
+                Admin admin = context.Members.Where(m => m.FirstName == firstName && m.LastName == lastName).First();
+                bool success = PasswordHelper.PasswordMatch(password, admin.PasswordHash, admin.Salt);
+                return success ? admin : null;
+            }
+        }
     }
 }
