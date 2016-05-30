@@ -30,7 +30,20 @@ namespace LibraryData
                 context.SubmitChanges();
             }
         }
-  
+        public bool CheckAuthor(string firstName, string lastName)
+        {
+            using(var context = new DataClasses1DataContext(_connectionString))
+            {
+                return context.Authors.Any(a => a.FirstName == firstName && a.LastName == lastName);
+            }
+        }
+        public Author GetAuthor(string firstName,string lastName)
+        {
+            using (var context = new DataClasses1DataContext(_connectionString))
+            {
+                return context.Authors.Where(a => a.FirstName == firstName && a.LastName == lastName).First();
+            }
+        }
         public void AddSubject(Subject subject)
         {
             using (var context = new DataClasses1DataContext(_connectionString))
@@ -67,12 +80,36 @@ namespace LibraryData
                 return context.Books.ToList();
             }
         }
+        public Book GetBook(int bookId)
+        {
+            using (var context = new DataClasses1DataContext(_connectionString))
+            {
+                var loadOptions = new DataLoadOptions();
+                loadOptions.LoadWith<Book>(b => b.Author);
+                loadOptions.LoadWith<Book>(b => b.BookSubjects);
+                loadOptions.LoadWith<BookSubject>(b => b.Subject);
+                context.LoadOptions = loadOptions;
+                return context.Books.Where(b => b.Id == bookId).First();
+            }
+        }
+        public IEnumerable<Book> GetBooksByAuthor(int authorId)
+        {
+            using (var context = new DataClasses1DataContext(_connectionString))
+            {
+                var loadOptions = new DataLoadOptions();
+                loadOptions.LoadWith<Book>(b => b.Author);
+                loadOptions.LoadWith<Book>(b => b.BookSubjects);
+                loadOptions.LoadWith<BookSubject>(b => b.Subject);
+                context.LoadOptions = loadOptions;
+                return context.Books.Where(b => b.AuthorId == authorId).ToList();
+            }
+        }
         public IEnumerable<Author> GetAuthors()
         {
             using (var context = new DataClasses1DataContext(_connectionString))
             {
                 var loadOptions = new DataLoadOptions();
-                loadOptions.LoadWith<Author>(a => a.Books);                
+                loadOptions.LoadWith<Author>(a => a.Books);
                 context.LoadOptions = loadOptions;
                 return context.Authors.ToList();
             }
@@ -94,7 +131,7 @@ namespace LibraryData
                 return context.Borrows.Where(b => b.MemberId == member.Id).ToList();
             }
         }
-        public Member AddMember(string firstName,string lastName, string password)
+        public Member AddMember(string firstName, string lastName, string password)
         {
             Member member = new Member();
             string salt = PasswordHelper.GenerateRandomSalt();
@@ -114,7 +151,7 @@ namespace LibraryData
         {
             using (var context = new DataClasses1DataContext(_connectionString))
             {
-                Member member = context.Members.Where(m => m.FirstName  == firstName && m.LastName == lastName).First();
+                Member member = context.Members.Where(m => m.FirstName == firstName && m.LastName == lastName).First();
                 bool success = PasswordHelper.PasswordMatch(password, member.PasswordHash, member.Salt);
                 return success ? member : null;
             }
@@ -146,7 +183,7 @@ namespace LibraryData
         {
             using (var context = new DataClasses1DataContext(_connectionString))
             {
-                Admin admin = context.Members.Where(m => m.FirstName == firstName && m.LastName == lastName).First();
+                Admin admin = context.Admins.Where(a => a.FirstName == firstName && a.LastName == lastName).First();
                 bool success = PasswordHelper.PasswordMatch(password, admin.PasswordHash, admin.Salt);
                 return success ? admin : null;
             }

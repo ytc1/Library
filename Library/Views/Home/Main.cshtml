@@ -10,8 +10,8 @@
                @foreach(Book book in Model.Books)
                {
                    <tr>
-                       <td>@book.Name</td>
-                       <td>@book.Author</td>
+                       <td> <a href="/home/books?bookId=@book.Id" >@book.Name</a></td>
+                       <td><a href="/home/authors?authorId=@book.AuthorId">@book.Author</a></td>
                        <td></td>
                    </tr>
                }

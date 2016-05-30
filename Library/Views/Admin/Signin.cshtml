@@ -1,5 +1,12 @@
-﻿@{
-    ViewBag.Title = "Signin'";
-}
+﻿<div class="container">
+    <form class="form-group" method="post" action="/Admin/adminSignin">
+        <label>FirstName</label>
+        <input type="text" name="firstName" />
+        <label>LastName</label>
+        <input type="text" name="lastName" />
+        <label>Password</label>
+        <input type="text" name="password" />
+        <button type="submit" class="button btn-success ">Submit</button>
+    </form>
 
-<h2>Signin'</h2>
+</div>

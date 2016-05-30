@@ -1,5 +1,14 @@
-﻿@{
-    ViewBag.Title = "Main";
-}
-
-<h2>Main</h2>
+﻿<div class="container">
+    <h2>Add Book</h2>
+    <form class="action-post" method="post" action="admin/addbook">
+        <label>Title</label>
+        <input type="text" name="name" />
+        <label>Author FirstName</label>
+        <input type="text" name="authorFirst" />
+        <label>Author LastName</label>
+        <input type="text" name="authorLast" />
+        <label>Description</label>
+        <input type="text" name="description" />
+        <button type="submit" class="button btn-success ">Submit</button>
+    </form>
+</div>

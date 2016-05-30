@@ -55,5 +55,19 @@ namespace Library.Controllers
             homeModel.Books = Db.GetBooks();
             return RedirectToAction("Main", homeModel);
         }
+        public ActionResult Books(int bookId)
+        {
+            DataBase Db = new DataBase(connectionString);
+            BookModel Bm = new BookModel();
+            Bm.Book = Db.GetBook(bookId);
+            return View(Bm);
+        }
+        public ActionResult Authors(int authorId)
+        {
+            DataBase Db = new DataBase(connectionString);
+            HomeModel homeModel = new HomeModel();
+            homeModel.Books = Db.GetBooksByAuthor(authorId);
+            return View(homeModel);
+        }
     }
 }
