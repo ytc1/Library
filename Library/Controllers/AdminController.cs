@@ -8,7 +8,7 @@ using System.Web.Security;
 
 namespace Library.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         //
         // GET: /Admin/
